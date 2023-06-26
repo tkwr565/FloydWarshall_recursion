@@ -3,6 +3,8 @@
 This project implements the Floyd Warshall algorithm to find the shortest paths between all pairs of vertices in a given graph. 
 It provides the recursive version of the algorithm.
 
+![badge1](https://img.shields.io/github/issues/tkwr565/FloydWarshall_recursion)
+
 ## Table of Contents
 
 - [Description](#description)
