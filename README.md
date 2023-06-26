@@ -17,7 +17,11 @@ It provides the recursive version of the algorithm.
 
 The Floyd Warshall algorithm is a graph algorithm used to find the shortest paths between all pairs of vertices in a weighted graph. It can handle both positive and negative edge weights, but it doesn't work for graphs with negative cycles.
 
-This project provides two implementations of the algorithm:
+This project provides the recursion implementations of the algorithm:
+(The imperative version is also included for comparison through unittest)
+- `version_recursion.py`: Recursive implementation of the Floyd Warshall algorithm.
 
-- `floydWarshallIterative(graph)`: Iterative implementation of the Floyd Warshall algorithm.
-- `floydWarshallRecursive(graph)`: Recursive implementation of the Floyd Warshall algorithm.
+## Installation
+
+1. Clone the repository:
+git clone git@github.com:tkwr565/FloydWarshall_recursion.git
