@@ -19,8 +19,7 @@ def floydWarshallImperative(graph):
 
 def printSolution(dist):
     print(
-        "Following matrix shows the shortest distances\
-between every pair of vertices"
+        "Following matrix shows the shortest distances between every pair of vertices"
     )
     for i in range(V):
         for j in range(V):

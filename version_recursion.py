@@ -49,18 +49,40 @@ def floydWarshallRecursive(
 
 
 # Function to print the solution matrix
-def printSolution(dist):
-    print(
-        "Following matrix shows the shortest distances between every pair of vertices"
-    )
-    for i in range(V):
-        for j in range(V):
-            if dist[i][j] == INF:
-                print("%7s" % ("INF"), end=" ")
-            else:
-                print("%7d\t" % (dist[i][j]), end=" ")
-            if j == V - 1:
-                print()
+def printSolutionRecursive(dist, i=0, j=0):
+    """
+    Recursively prints the matrix of shortest distances between every pair of vertices.
+
+    Args:
+        dist (list[list[int]]): The distance matrix representing the shortest distances.
+        i (int): The current row index (default: 0).
+        j (int): The current column index (default: 0).
+    """
+
+    # Base case: If j has reached the end of the row, move to the next row
+    if j == V:
+        print()
+        printSolutionRecursive(dist, i + 1, 0)
+        return
+
+    # Base case: If i has reached the end of the matrix, return
+    if i == V:
+        return
+
+    # Before printing the result, print the statement line
+    if i == 0 and j == 0:
+        print(
+            "Following matrix shows the shortest distances between every pair of vertices"
+        )
+
+    # Print the current distance
+    if dist[i][j] == INF:
+        print("%7s" % ("INF"), end=" ")
+    else:
+        print("%7d\t" % (dist[i][j]), end=" ")
+
+    # Recurse to the next column
+    printSolutionRecursive(dist, i, j + 1)
 
 
 # Function to initialize the graph and call the recursive function
@@ -72,7 +94,7 @@ def floydWarshall(graph):
     dist = floydWarshallRecursive(graph, dist, 0, 0, 0)
 
     # Print the solution
-    printSolution(dist)
+    printSolutionRecursive(dist)
 
 
 # Driver's code

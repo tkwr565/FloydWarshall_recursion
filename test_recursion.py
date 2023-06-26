@@ -22,7 +22,7 @@ class FloydWarshallTestCase(unittest.TestCase):
         capture and compare the output of floydwarshall algorithm calculation function of recursion
         and imperative version
         """
-        expected_output = version_imperative.floydWarshall(self.graph)
+        expected_output = version_imperative.floydWarshallImperative(self.graph)
         #        print(self.graph)
         dist = [row[:] for row in self.graph]
         result = version_recursion.floydWarshallRecursive(self.graph, dist, 0, 0, 0)
@@ -40,14 +40,13 @@ class FloydWarshallTestCase(unittest.TestCase):
 
         output = io.StringIO()
         with redirect_stdout(output):
-            # Call the function
-            version_recursion.printSolution(self.graph)
+            version_recursion.printSolutionRecursive(self.graph)
+
         expected_output = io.StringIO()
         with redirect_stdout(expected_output):
-            version_recursion.printSolution(self.graph)
-        #        print(output.getvalue())
-        #        print(expected_output.getvalue())
-        self.assertEqual(output.getvalue(), expected_output.getvalue())
+            version_imperative.printSolution(self.graph)
+
+        self.assertEqual(expected_output.getvalue(), output.getvalue())
 
 
 # Run the unit tests
