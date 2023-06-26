@@ -6,20 +6,40 @@ INF = 99999
 
 
 # Recursive function to calculate the shortest paths using Floyd-Warshall algorithm
-def floydWarshallRecursive(graph, dist, k, i, j):
+def floydWarshallRecursive(
+    graph: list[list[int]], dist: list[list[int]], k: int, i: int, j: int
+) -> list[list[int]]:
+    """
+    Recursively calculates the shortest paths between all pairs of vertices using the Floyd-Warshall algorithm.
+
+    Args:
+        graph (list[list[int]]): The input graph represented as an adjacency matrix.
+        dist (list[list[int]]): The distance matrix representing the current shortest distances between vertices.
+        k (int): The current intermediate vertex being considered.
+        i (int): The current source vertex being considered.
+        j (int): The current destination vertex being considered.
+
+    Returns:
+        list[list[int]]: The updated distance matrix with the shortest distances between all pairs of vertices.
+    """
+
     # Base case: If k has reached V, return the final distance matrix
     if k == V:
         return dist
 
-    # Update the distance matrix
+    # Cacluate the new distance through the intermediate vertex k,
+    # Update the distance matrix if new distance is shorter
     if dist[i][j] > dist[i][k] + dist[k][j]:
         dist[i][j] = dist[i][k] + dist[k][j]
 
-    # Recurse by incrementing k and traversing all vertices for i and j
+    # Recurse by incrementing k and traversing all vertices for i and j:
+    # First recurse through j (columns of matrix)
     if j < V - 1:
         dist = floydWarshallRecursive(graph, dist, k, i, j + 1)
+    # Then recurse through i (rows of matrx)
     elif i < V - 1:
         dist = floydWarshallRecursive(graph, dist, k, i + 1, 0)
+    # Finally increment k, and recurse over again
     else:
         dist = floydWarshallRecursive(graph, dist, k + 1, 0, 0)
 
