@@ -1,7 +1,6 @@
 # Recursion version python code for Floyd Warshall Algorithm
 
 # Number of vertices in the graph
-V = 4
 
 # Define infinity as a large enough value
 INF = 99999
@@ -9,7 +8,12 @@ INF = 99999
 
 # Recursive function to calculate the shortest paths using Floyd-Warshall algorithm
 def floydWarshallRecursive(
-    graph: list[list[int]], dist: list[list[int]], k: int, i: int, j: int
+    graph: list[list[int]],
+    dist: list[list[int]],
+    k: int,
+    i: int,
+    j: int,
+    V: int,
 ) -> list[list[int]]:
     """
     Recursively calculates the shortest paths between all pairs of vertices using the Floyd-Warshall algorithm.
@@ -20,6 +24,7 @@ def floydWarshallRecursive(
         k (int): The current intermediate vertex being considered.
         i (int): The current source vertex being considered.
         j (int): The current destination vertex being considered.
+        V (int): Dimension of the matrix
 
     Returns:
         list[list[int]]: The updated distance matrix with the shortest distances between all pairs of vertices.
@@ -37,19 +42,19 @@ def floydWarshallRecursive(
     # Recurse by incrementing k and traversing all vertices for i and j:
     # First recurse through j (columns of matrix)
     if j < V - 1:
-        dist = floydWarshallRecursive(graph, dist, k, i, j + 1)
+        dist = floydWarshallRecursive(graph, dist, k, i, j + 1, V)
     # Then recurse through i (rows of matrx)
     elif i < V - 1:
-        dist = floydWarshallRecursive(graph, dist, k, i + 1, 0)
+        dist = floydWarshallRecursive(graph, dist, k, i + 1, 0, V)
     # Finally increment k, and recurse over again
     else:
-        dist = floydWarshallRecursive(graph, dist, k + 1, 0, 0)
+        dist = floydWarshallRecursive(graph, dist, k + 1, 0, 0, V)
 
     return dist
 
 
 # Function to print the solution matrix
-def printSolutionRecursive(dist, i=0, j=0):
+def printSolutionRecursive(dist, V, i=0, j=0):
     """
     Recursively prints the matrix of shortest distances between every pair of vertices.
 
@@ -62,7 +67,7 @@ def printSolutionRecursive(dist, i=0, j=0):
     # Base case: If j has reached the end of the row, move to the next row
     if j == V:
         print()
-        printSolutionRecursive(dist, i + 1, 0)
+        printSolutionRecursive(dist, V, i + 1, 0)
         return
 
     # Base case: If i has reached the end of the matrix, return
@@ -82,25 +87,26 @@ def printSolutionRecursive(dist, i=0, j=0):
         print("%7d\t" % (dist[i][j]), end=" ")
 
     # Recurse to the next column
-    printSolutionRecursive(dist, i, j + 1)
+    printSolutionRecursive(dist, V, i, j + 1)
 
 
 # Function to initialize the graph and call the recursive function
-def floydWarshall(graph):
+def floydWarshall(graph, V):
     # Create a copy of the graph to use as the distance matrix
     dist = [row[:] for row in graph]
 
     # Call the recursive function to calculate the shortest paths
-    dist = floydWarshallRecursive(graph, dist, 0, 0, 0)
+    dist = floydWarshallRecursive(graph, dist, 0, 0, 0, V)
 
     # Print the solution
-    printSolutionRecursive(dist)
+    printSolutionRecursive(dist, V)
 
 
 # Driver's code
 if __name__ == "__main__":
     # Sample graph
+    V0 = 4
     graph = [[0, 5, INF, 10], [INF, 0, 3, INF], [INF, INF, 0, 1], [INF, INF, INF, 0]]
 
     # Call the function
-    floydWarshall(graph)
+    floydWarshall(graph, V=V0)

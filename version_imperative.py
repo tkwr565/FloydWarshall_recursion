@@ -3,12 +3,10 @@
 # code modify to be used in unittest
 
 
-V = 4
-
 INF = 99999
 
 
-def floydWarshallImperative(graph):
+def floydWarshallImperative(graph, V):
     dist = list(map(lambda i: list(map(lambda j: j, i)), graph))
     for k in range(V):
         for i in range(V):
@@ -17,7 +15,7 @@ def floydWarshallImperative(graph):
     return dist
 
 
-def printSolution(dist):
+def printSolution(dist, V):
     print(
         "Following matrix shows the shortest distances between every pair of vertices"
     )
@@ -31,12 +29,13 @@ def printSolution(dist):
                 print()
 
 
-def floydWarshall(graph):
-    dist = floydWarshallImperative(graph)
-    printSolution(dist)
+def floydWarshall(graph, V):
+    dist = floydWarshallImperative(graph, V)
+    printSolution(dist, V)
 
 
 if __name__ == "__main__":
+    V0 = 4
     graph = [[0, 5, INF, 10], [INF, 0, 3, INF], [INF, INF, 0, 1], [INF, INF, INF, 0]]
-    floydWarshall(graph)
+    floydWarshall(graph, V=V0)
 # This code is contributed by Mythri J L
