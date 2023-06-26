@@ -23,7 +23,9 @@ This project provides the recursion implementations of the algorithm:
 ## Installation
 
 1. Clone the repository:
+```
 git clone git@github.com:tkwr565/FloydWarshall_recursion.git
+```
 
 2. Create and activate a virtual environment
 
