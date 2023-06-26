@@ -10,10 +10,7 @@ It provides the recursive version of the algorithm.
 - [Description](#description)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Examples](#examples)
 - [Tests](#tests)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Description
 
@@ -27,3 +24,20 @@ This project provides the recursion implementations of the algorithm:
 
 1. Clone the repository:
 git clone git@github.com:tkwr565/FloydWarshall_recursion.git
+
+2. Create and activate a virtual environment
+
+3. Install the dependencies:
+pip install -r requirements.txt
+
+## Usage
+
+The script `version_recursion.py` demonstrates how to use the recursive version of the Floyd Warshall algorithm. You can modify this script or import the function into your own code.
+Make sure to modify the `graph` and `V` variables to represent your input graph.
+
+## Tests
+The project includes a test file `test_recursion.py` that contains unit tests for the recursive version of the algorithm. 
+several version of test were made.
+This version test through 3x3, 4x4, and 6x6 matrices by modifing `V` variable in `version_recursion.py` and `version_imperative.py`.
+Modify the values in `test_recursion.py` to make your own tests.
+
