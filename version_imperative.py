@@ -39,4 +39,3 @@ def floydWarshall(graph):
 if __name__ == "__main__":
     graph = [[0, 5, INF, 10], [INF, 0, 3, INF], [INF, INF, 0, 1], [INF, INF, INF, 0]]
     floydWarshall(graph)
-# This code is contributed by Mythri J L
