@@ -10,11 +10,14 @@ class FloydWarshallTestCase(unittest.TestCase):
         """
         Set up the test case with sample data
         """
-        self.graph = [
-            [0, 5, INF, 10],
-            [INF, 0, 3, INF],
-            [INF, INF, 0, 1],
-            [INF, INF, INF, 0],
+        self.graph = [[0, 5, INF], [INF, 0, 3], [INF, INF, 0]]
+        self.graph1 = [
+            [0, 2, 7, 9, 1, INF],
+            [INF, 0, INF, 1, 9, 2],
+            [2, 1, 0, INF, INF, 8],
+            [1, 2, INF, 0, 9, 1],
+            [1, 2, INF, INF, 0, 7],
+            [INF, 2, 3, 1, 2, 0],
         ]
 
     def test_floydWarshall(self):
@@ -22,12 +25,21 @@ class FloydWarshallTestCase(unittest.TestCase):
         capture and compare the output of floydwarshall algorithm calculation function of recursion
         and imperative version
         """
+
+        # first test with 3x3 sample
+        version_imperative.V = 3
+        version_recursion.V = 3
         expected_output = version_imperative.floydWarshallImperative(self.graph)
-        #        print(self.graph)
         dist = [row[:] for row in self.graph]
         result = version_recursion.floydWarshallRecursive(self.graph, dist, 0, 0, 0)
-        #        print(result)
-        #        print(expected_output)
+        self.assertEqual(result, expected_output)
+
+        # then test with 6x6 sample
+        version_imperative.V = 6
+        version_recursion.V = 6
+        expected_output = version_imperative.floydWarshallImperative(self.graph1)
+        dist = [row[:] for row in self.graph1]
+        result = version_recursion.floydWarshallRecursive(self.graph1, dist, 0, 0, 0)
         self.assertEqual(result, expected_output)
 
     def test_printSolution(self):
@@ -35,9 +47,15 @@ class FloydWarshallTestCase(unittest.TestCase):
         capture and compare the output of print functions of recursion and imperative version
         by printing example graph
         """
+
+        # import io module to create StringIO object
+        # use redirect_stout to redirect print value to StringIO object for unittest
         import io
         from contextlib import redirect_stdout
 
+        # first test with 3x3 sample
+        version_imperative.V = 3
+        version_recursion.V = 3
         output = io.StringIO()
         with redirect_stdout(output):
             version_recursion.printSolutionRecursive(self.graph)
@@ -45,6 +63,19 @@ class FloydWarshallTestCase(unittest.TestCase):
         expected_output = io.StringIO()
         with redirect_stdout(expected_output):
             version_imperative.printSolution(self.graph)
+
+        self.assertEqual(expected_output.getvalue(), output.getvalue())
+
+        # then test with 6x6 sample
+        version_imperative.V = 6
+        version_recursion.V = 6
+        output = io.StringIO()
+        with redirect_stdout(output):
+            version_recursion.printSolutionRecursive(self.graph1)
+
+        expected_output = io.StringIO()
+        with redirect_stdout(expected_output):
+            version_imperative.printSolution(self.graph1)
 
         self.assertEqual(expected_output.getvalue(), output.getvalue())
 
